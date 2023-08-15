@@ -1,0 +1,148 @@
+Ejecutable como documento HTML5
+    con autor allnulled
+    con nombre meditator
+    con versión 1
+<head>
+    <title>Meditator</title>
+    <meta charset="utf8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      
+    </style>
+</head>
+<body>
+    <audio id="agua" src="agua.mp3"></audio>
+    <div id="app"></div>
+</body>.
+
+importo api nativa.
+
+creo sonar como una función donde {
+    hago document.getElementById("agua").play().
+}.
+
+creo PaginaDeInicio como un componente vue2 con nombre "PaginaDeInicio" con plantilla {
+  <div class="PaginaDeInicio Component win7">
+    <button v-on:click="iniciar_o_parar">{{ iniciado ? "Parar" : "Iniciar" }}</button>
+    <table>
+        <tr>
+            <td>Tiempo meditado:</td>
+            <td colspan="2" style="background-color: black; color: white; border-radius:2pt; padding: 10px; text-align: center;">{{ tiempo }} segundos</td>
+        </tr>
+        <tr>
+            <td>Transición 0</td>
+            <td :style="(1 < (tiempo / tiempo_transicion_3)) ? 'background-color: #99ff99; color: black;' : ''">{{ tiempo_transicion_0 }} segundos</td>
+            <td>Respiraciones cada 5 segundos</td>
+        </tr>
+        <tr>
+            <td>Transición 1</td>
+            <td :style="(1 < (tiempo / tiempo_transicion_2)) ? 'background-color: #99ff99; color: black;' : ''">{{ tiempo_transicion_1 }} segundos</td>
+            <td>Respiraciones cada 10 segundos</td>
+        </tr>
+        <tr>
+            <td>Transición 2</td>
+            <td :style="(1 < (tiempo / tiempo_transicion_1)) ? 'background-color: #99ff99; color: black;' : ''">{{ tiempo_transicion_2 }} segundos</td>
+            <td>Respiraciones cada 15 segundos</td>
+        </tr>
+        <tr>
+            <td>Transición 3</td>
+            <td :style="(1 < (tiempo / tiempo_transicion_0)) ? 'background-color: #99ff99; color: black;' : ''">{{ tiempo_transicion_3 }} segundos</td>
+            <td>Respiraciones cada 20 segundos</td>
+        </tr>
+    </table>
+  </div>
+} con lógica {
+    retorno {
+        método data donde {
+            retorno {
+                iniciado: false,
+                tiempo: 0,
+                tiempo_contador: undefined,
+                tiempo_transicion_0: 60 * 1,
+                tiempo_transicion_1: 60 * 5,
+                tiempo_transicion_2: 60 * 10,
+                tiempo_transicion_3: 60 * 15
+            }.
+        }.
+        propiedad methods como {
+            método iniciar_o_parar donde {
+                hago clearInterval(this.tiempo_contador).
+                si this.iniciado es igual que false {
+                    asigno this.tiempo_contador como setInterval(una lambda donde {
+                        incremento this.tiempo en 1.
+                        creo en_transicion_3 como (this.tiempo / this.tiempo_transicion_3) es mayor que 1.
+                        creo en_transicion_2 como (this.tiempo / this.tiempo_transicion_2) es mayor que 1.
+                        creo en_transicion_1 como (this.tiempo / this.tiempo_transicion_1) es mayor que 1.
+                        creo en_transicion_0 como (this.tiempo / this.tiempo_transicion_0) es mayor que 1.
+                        imprimo en_transicion_3.
+                        imprimo en_transicion_2.
+                        imprimo en_transicion_1.
+                        imprimo en_transicion_0.
+                        imprimo this.tiempo.
+                        imprimo this.tiempo_transicion_0.
+                        imprimo this.tiempo_transicion_1.
+                        imprimo this.tiempo_transicion_2.
+                        imprimo this.tiempo_transicion_3.
+                        si en_transicion_3 {
+                            si (this.tiempo % 30) es igual que 0 {
+                                hago sonar().
+                            }.
+                        } pero si en_transicion_2 {
+                            si (this.tiempo % 20) es igual que 0 {
+                                hago sonar().
+                            }.
+                        } pero si en_transicion_1 {
+                            si (this.tiempo % 15) es igual que 0 {
+                                hago sonar().
+                            }.
+                        } pero si en_transicion_0 {
+                            si (this.tiempo % 10) es igual que 0 {
+                                hago sonar().
+                            }.
+                        } y si no {
+                            si (this.tiempo % 5) es igual que 0 {
+                                hago sonar().
+                            }.
+                        }.
+                        hago this.$forceUpdate(true).
+                    }, 1000).
+                    asigno this.iniciado como true.
+                } y si no {
+                    asigno this.iniciado como false.
+                }.
+            }.
+        }.
+    }.
+}.
+
+creo App como una aplicación vue2 con nombre "App" con rutas [{
+    propiedad path como "/".
+    propiedad name como "Home".
+    propiedad component como PaginaDeInicio.
+    propiedad props como {}.
+}] con traducciones {
+    propiedad es como {}.
+    propiedad en como {}.
+    propiedad ca como {}.
+} con plantilla {
+  <div class="App Component Castelog-app">
+    <router-view></router-view>
+  </div>
+} con estilos {
+    html {}
+    body {}
+    .Component {}
+    .App {}
+} con lógica {
+  retorno {
+    método data donde {
+      retorno {
+        
+      }.
+    }.
+    propiedad methods como {}.
+    propiedad watch como {}.
+    método beforeMount donde {}.
+    método mounted donde {}.
+  }.
+} montada en "#app".

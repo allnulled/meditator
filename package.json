@@ -1,0 +1,12 @@
+{
+  "name": "meditator",
+  "version": "1.0.0",
+  "description": "",
+  "main": "docs/meditator.1.html",
+  "scripts": {
+    "test": "npx http-server -c-1 docs -o meditator.1.html"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

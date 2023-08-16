@@ -3,13 +3,17 @@
     <meta charset="utf8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <style>
-      
+      .botonaco {
+          width: 100% !important;
+          padding: 14px !important;
+      }
+
     </style>
 </head><body>
     <audio id="agua" src="agua.mp3"></audio>
     <div id="app"></div>
 <script>
-// [castelog:html5izable] ACTIVADO con: {"autor":"allnulled","nombre":"meditator","version":"1","contenido":{"head":"<head>\n    <title>Meditator</title>\n    <meta charset=\"utf8\" />\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\" />\n    <style>\n      \n    </style>\n</head>","body":"<body>\n    <audio id=\"agua\" src=\"agua.mp3\"></audio>\n    <div id=\"app\"></div>\n</body>"}}
+// [castelog:html5izable] ACTIVADO con: {"autor":"allnulled","nombre":"meditator","version":"1","contenido":{"head":"<head>\n    <title>Meditator</title>\n    <meta charset=\"utf8\" />\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\" />\n    <style>\n      .botonaco {\n          width: 100% !important;\n          padding: 14px !important;\n      }\n\n    </style>\n</head>","body":"<body>\n    <audio id=\"agua\" src=\"agua.mp3\"></audio>\n    <div id=\"app\"></div>\n</body>"}}
 
 
 
@@ -57729,7 +57733,7 @@ const PaginaDeInicio = Castelog.metodos.un_componente_vue2("PaginaDeInicio",
  + "    <table>"
  + "        <tr>"
  + "            <td colspan=\"100\">"
- + "                <button v-on:click=\"iniciar_o_parar\" style=\"width: 100%; padding: 14px;\">{{ iniciado ? \"Parar\" : \"Iniciar\" }}</button>"
+ + "                <button v-on:click=\"iniciar_o_parar\" class=\"botonaco\">{{ iniciado ? \"Parar\" : \"Iniciar\" }}</button>"
  + "            </td>"
  + "        </tr>"
  + "        <tr>"
@@ -57737,24 +57741,22 @@ const PaginaDeInicio = Castelog.metodos.un_componente_vue2("PaginaDeInicio",
  + "            <td colspan=\"2\" style=\"background-color: black; color: white; border-radius:2pt; padding: 10px; text-align: center;\">{{ tiempo }} segundos</td>"
  + "        </tr>"
  + "        <tr>"
- + "            <td>Transición 0</td>"
- + "            <td :style=\"(1 < (tiempo / tiempo_transicion_3)) ? 'background-color: #99ff99; color: black;' : ''\">{{ tiempo_transicion_0 }} segundos</td>"
- + "            <td>Respiraciones cada 5 segundos</td>"
+ + "            <td>Frecuencia de respiración:</td>"
+ + "            <td colspan=\"2\" style=\"background-color: black; color: white; border-radius:2pt; padding: 10px; text-align: center;\">{{ frecuencia_respiratoria }} segundos</td>"
  + "        </tr>"
  + "        <tr>"
- + "            <td>Transición 1</td>"
- + "            <td :style=\"(1 < (tiempo / tiempo_transicion_2)) ? 'background-color: #99ff99; color: black;' : ''\">{{ tiempo_transicion_1 }} segundos</td>"
- + "            <td>Respiraciones cada 10 segundos</td>"
- + "        </tr>"
- + "        <tr>"
- + "            <td>Transición 2</td>"
- + "            <td :style=\"(1 < (tiempo / tiempo_transicion_1)) ? 'background-color: #99ff99; color: black;' : ''\">{{ tiempo_transicion_2 }} segundos</td>"
- + "            <td>Respiraciones cada 15 segundos</td>"
- + "        </tr>"
- + "        <tr>"
- + "            <td>Transición 3</td>"
- + "            <td :style=\"(1 < (tiempo / tiempo_transicion_0)) ? 'background-color: #99ff99; color: black;' : ''\">{{ tiempo_transicion_3 }} segundos</td>"
- + "            <td>Respiraciones cada 20 segundos</td>"
+ + "            <td colspan=\"100\">"
+ + "                <table style=\"width:100%;\">"
+ + "                    <tr>"
+ + "                        <td style=\"width: 90%;\">"
+ + "                            <button class=\"botonaco\" v-on:click=\"subir_frecuencia\">Relentizar</button>"
+ + "                        </td>"
+ + "                        <td style=\"width: 10%;\">"
+ + "                            <button class=\"botonaco\" v-on:click=\"bajar_frecuencia\">Acelerar</button>"
+ + "                        </td>"
+ + "                    </tr>"
+ + "                </table>"
+ + "            </td>"
  + "        </tr>"
  + "    </table>"
  + "  </div>",
@@ -57762,10 +57764,7 @@ const PaginaDeInicio = Castelog.metodos.un_componente_vue2("PaginaDeInicio",
 return { iniciado:false,
 tiempo:0,
 tiempo_contador:undefined,
-tiempo_transicion_0:60 * 1,
-tiempo_transicion_1:60 * 5,
-tiempo_transicion_2:60 * 10,
-tiempo_transicion_3:60 * 15
+frecuencia_respiratoria:5
 };
 } catch(error) {
 console.log(error);
@@ -57773,48 +57772,29 @@ throw error;
 }
 
 },
-methods:{ iniciar_o_parar() {try {
+methods:{ bajar_frecuencia() {try {
+this.frecuencia_respiratoria -= 1;
+} catch(error) {
+console.log(error);
+throw error;
+}
+
+},
+subir_frecuencia() {try {
+this.frecuencia_respiratoria += 1;
+} catch(error) {
+console.log(error);
+throw error;
+}
+
+},
+iniciar_o_parar() {try {
 clearInterval( this.tiempo_contador );
 if(this.iniciado === false) {
 this.tiempo_contador = setInterval( () => {try {
 this.tiempo += 1;
-const en_transicion_3 = ( this.tiempo / this.tiempo_transicion_3 ) > 1;
-const en_transicion_2 = ( this.tiempo / this.tiempo_transicion_2 ) > 1;
-const en_transicion_1 = ( this.tiempo / this.tiempo_transicion_1 ) > 1;
-const en_transicion_0 = ( this.tiempo / this.tiempo_transicion_0 ) > 1;
-console.log(en_transicion_3);
-console.log(en_transicion_2);
-console.log(en_transicion_1);
-console.log(en_transicion_0);
-console.log(this.tiempo);
-console.log(this.tiempo_transicion_0);
-console.log(this.tiempo_transicion_1);
-console.log(this.tiempo_transicion_2);
-console.log(this.tiempo_transicion_3);
-if(en_transicion_3) {
-if(( this.tiempo % 30 ) === 0) {
+if(( this.tiempo % this.frecuencia_respiratoria ) === 0) {
 sonar(  );
-}
-}
-else if(en_transicion_2) {
-if(( this.tiempo % 20 ) === 0) {
-sonar(  );
-}
-}
-else if(en_transicion_1) {
-if(( this.tiempo % 15 ) === 0) {
-sonar(  );
-}
-}
-else if(en_transicion_0) {
-if(( this.tiempo % 10 ) === 0) {
-sonar(  );
-}
-}
-else {
-if(( this.tiempo % 5 ) === 0) {
-sonar(  );
-}
 }
 this.$forceUpdate( true );
 } catch(error) {
